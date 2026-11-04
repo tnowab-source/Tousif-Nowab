@@ -1,0 +1,6 @@
+{
+  "name": "Food Stop",
+  "description": "Mobile ordering and digital menu app for Food Stop – Home Kitchen featuring freshly made Momos, Sandwiches, Burgers, and Biryani with instant WhatsApp ordering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
