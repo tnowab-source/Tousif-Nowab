@@ -46,21 +46,4 @@ class ExampleUnitTest {
         assertTrue(waQr[0][0])
         assertTrue(igQr[0][0])
     }
-
-    @Test
-    fun verifyDailySpecialRotation() {
-        val uniqueItemsAcrossCycle = (1..17).map { day ->
-            FoodStopRepository.getDailySpecial(day).second.id
-        }.toSet()
-        assertEquals(17, uniqueItemsAcrossCycle.size)
-
-        val viewModel = MenuViewModel()
-        val initialSpecialId = viewModel.uiState.value.dailySpecialPair.second.id
-        viewModel.shuffleDailySpecial()
-        val nextSpecialId = viewModel.uiState.value.dailySpecialPair.second.id
-        assertTrue(initialSpecialId != nextSpecialId)
-        viewModel.resetDailySpecialToToday()
-        assertEquals(initialSpecialId, viewModel.uiState.value.dailySpecialPair.second.id)
-    }
 }
-

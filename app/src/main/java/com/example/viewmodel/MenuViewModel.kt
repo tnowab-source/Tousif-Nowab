@@ -62,15 +62,10 @@ data class FoodStopUiState(
     val itemInstructions: Map<String, String> = emptyMap(),
     val orderNote: String = "",
     val isOrderSheetVisible: Boolean = false,
-    val activeQrModal: QrModalData? = null,
-    val dailySpecialDayOfYear: Int = java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_YEAR),
-    val dailySpecialOffset: Int = 0
+    val activeQrModal: QrModalData? = null
 ) {
     val selectedCategory: MenuCategory?
         get() = selectedCategoryId?.let { FoodStopRepository.getCategoryById(it) }
-
-    val dailySpecialPair: Pair<MenuCategory, MenuItem>
-        get() = FoodStopRepository.getDailySpecial(dailySpecialDayOfYear, dailySpecialOffset)
 
     val totalCartItems: Int
         get() = cartQuantities.values.sum()
@@ -222,16 +217,6 @@ class MenuViewModel(
 
     fun cycleOrderStatus() {
         _uiState.update { it.copy(currentOrderStatus = it.currentOrderStatus.next()) }
-    }
-
-    fun shuffleDailySpecial() {
-        _uiState.update {
-            it.copy(dailySpecialOffset = (it.dailySpecialOffset + 1) % FoodStopRepository.allItems.size)
-        }
-    }
-
-    fun resetDailySpecialToToday() {
-        _uiState.update { it.copy(dailySpecialOffset = 0) }
     }
 
     fun incrementItem(item: MenuItem) {

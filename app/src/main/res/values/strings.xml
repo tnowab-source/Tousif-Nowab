@@ -104,11 +104,4 @@
     <string name="share_chooser_title">Share %1$s with friends</string>
     <string name="add_all_favorites_to_cart">Add All Favorites to Order</string>
     <string name="clear_favorites">Clear Favorites</string>
-    <string name="daily_special_badge">✨ TODAY\'S DAILY SPECIAL</string>
-    <string name="daily_special_chef_pick">CHEF\'S FEATURED PICK</string>
-    <string name="daily_special_subtitle">Handpicked daily from our home kitchen to bring you something new</string>
-    <string name="daily_special_try_another">Shuffle Pick</string>
-    <string name="daily_special_reset_today">Today\'s Pick</string>
-    <string name="daily_special_add_button">Add Special</string>
-    <string name="daily_special_order_whatsapp">Order Special on WhatsApp</string>
 </resources>

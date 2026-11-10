@@ -1017,11 +1017,6 @@ fun FullMenuSection(
     searchQuery: String,
     activeCategoryFilterId: String?,
     activePriceFilter: com.example.model.PriceRangeFilter?,
-    dailySpecialPair: Pair<MenuCategory, MenuItem> = FoodStopRepository.getDailySpecial(1, 0),
-    isTodayDefault: Boolean = true,
-    onShuffleSpecial: () -> Unit = {},
-    onResetToTodaySpecial: () -> Unit = {},
-    onOpenCategory: (String) -> Unit = {},
     cartQuantities: Map<String, Int>,
     itemInstructions: Map<String, String> = emptyMap(),
     onItemInstructionChange: (String, String) -> Unit = { _, _ -> },
@@ -1041,25 +1036,6 @@ fun FullMenuSection(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        // Daily Special Highlight Section at the top of the menu
-        val (_, specialItem) = dailySpecialPair
-        DailySpecialHighlightCard(
-            dailySpecialPair = dailySpecialPair,
-            isTodayDefault = isTodayDefault,
-            quantityInCart = cartQuantities[specialItem.id] ?: 0,
-            itemInstruction = itemInstructions[specialItem.id] ?: "",
-            onItemInstructionChange = { onItemInstructionChange(specialItem.id, it) },
-            onTogglePresetInstruction = { onTogglePresetInstruction(specialItem.id, it) },
-            isFavorite = specialItem.id in favoriteItemIds,
-            onToggleFavorite = onToggleFavorite,
-            onIncrementItem = onIncrementItem,
-            onDecrementItem = onDecrementItem,
-            onDirectWhatsAppOrder = onDirectItemWhatsApp,
-            onOpenCategory = onOpenCategory,
-            onShuffleSpecial = onShuffleSpecial,
-            onResetToTodaySpecial = onResetToTodaySpecial
-        )
-
         // Search input
         OutlinedTextField(
             value = searchQuery,

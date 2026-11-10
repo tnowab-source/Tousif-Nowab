@@ -401,10 +401,6 @@ fun FoodStopApp(
                                     HomeScreenSection(
                                         searchQuery = uiState.searchQuery,
                                         activePriceFilter = uiState.activePriceFilter,
-                                        dailySpecialPair = uiState.dailySpecialPair,
-                                        isTodayDefault = uiState.dailySpecialOffset == 0,
-                                        onShuffleSpecial = { viewModel.shuffleDailySpecial() },
-                                        onResetToTodaySpecial = { viewModel.resetDailySpecialToToday() },
                                         favoritePairs = uiState.favoriteItemsWithCategory,
                                         favoriteItemIds = uiState.favoriteItemIds,
                                         itemInstructions = uiState.itemInstructions,
@@ -472,11 +468,6 @@ fun FoodStopApp(
                                     searchQuery = uiState.searchQuery,
                                     activeCategoryFilterId = uiState.activeCategoryFilterId,
                                     activePriceFilter = uiState.activePriceFilter,
-                                    dailySpecialPair = uiState.dailySpecialPair,
-                                    isTodayDefault = uiState.dailySpecialOffset == 0,
-                                    onShuffleSpecial = { viewModel.shuffleDailySpecial() },
-                                    onResetToTodaySpecial = { viewModel.resetDailySpecialToToday() },
-                                    onOpenCategory = { viewModel.openCategory(it) },
                                     cartQuantities = uiState.cartQuantities,
                                     itemInstructions = uiState.itemInstructions,
                                     onItemInstructionChange = { id, text ->
@@ -639,10 +630,6 @@ fun FoodStopApp(
 private fun HomeScreenSection(
     searchQuery: String,
     activePriceFilter: com.example.model.PriceRangeFilter?,
-    dailySpecialPair: Pair<com.example.model.MenuCategory, com.example.model.MenuItem>,
-    isTodayDefault: Boolean,
-    onShuffleSpecial: () -> Unit,
-    onResetToTodaySpecial: () -> Unit,
     favoritePairs: List<Pair<com.example.model.MenuCategory, com.example.model.MenuItem>>,
     favoriteItemIds: Set<String>,
     itemInstructions: Map<String, String>,
@@ -826,25 +813,6 @@ private fun HomeScreenSection(
                 }
             }
         } else {
-            // Daily Special Highlight Section at the top of the Home Menu
-            val (_, specialItem) = dailySpecialPair
-            com.example.ui.components.DailySpecialHighlightCard(
-                dailySpecialPair = dailySpecialPair,
-                isTodayDefault = isTodayDefault,
-                quantityInCart = cartQuantities[specialItem.id] ?: 0,
-                itemInstruction = itemInstructions[specialItem.id] ?: "",
-                onItemInstructionChange = { onItemInstructionChange(specialItem.id, it) },
-                onTogglePresetInstruction = { onTogglePresetInstruction(specialItem.id, it) },
-                isFavorite = specialItem.id in favoriteItemIds,
-                onToggleFavorite = onToggleFavorite,
-                onIncrementItem = onIncrementItem,
-                onDecrementItem = onDecrementItem,
-                onDirectWhatsAppOrder = onDirectItemWhatsApp,
-                onOpenCategory = onOpenCategory,
-                onShuffleSpecial = onShuffleSpecial,
-                onResetToTodaySpecial = onResetToTodaySpecial
-            )
-
             // Dedicated My Favorites section on Home screen when user has favorited dishes
             if (favoritePairs.isNotEmpty()) {
                 MyFavoritesSection(

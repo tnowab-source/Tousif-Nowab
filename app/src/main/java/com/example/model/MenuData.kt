@@ -259,34 +259,4 @@ object FoodStopRepository {
     val allItems: List<MenuItem> = categories.flatMap { it.items }
 
     fun getCategoryById(id: String): MenuCategory? = categories.find { it.id == id }
-
-    fun getDailySpecial(dayOfYear: Int, offset: Int = 0): Pair<MenuCategory, MenuItem> {
-        val total = allItems.size
-        val index = ((dayOfYear + offset) % total + total) % total
-        val item = allItems[index]
-        val category = getCategoryById(item.categoryId) ?: categories.first()
-        return category to item
-    }
-
-    fun getDailySpecialHighlightNote(itemId: String): String = when (itemId) {
-        "momo_chicken_steam" -> "Juicy minced chicken dumplings steamed to perfection & served with fiery home-ground red chilli garlic chutney."
-        "momo_veg_steam" -> "Delicate thin-wrapper dumplings packed with finely chopped crunchy garden vegetables, ginger & aromatic herbs."
-        "momo_chicken_fried" -> "Golden-crisp fried chicken momos with a savory, spice-kissed filling and tangy dipping sauce."
-        "momo_veg_fried" -> "Crispy golden-fried vegetable dumplings bursting with seasoned cabbage, carrot & spring onion goodness."
-        "momo_pan_fried_chicken" -> "Tossed on a hot skillet with tangy-spicy schezwan glaze for an irresistible smoky char."
-        "momo_pan_fried_veg" -> "Pan-seared veg momos coated in our signature spicy garlic-chilli home kitchen sauce."
-        "sandwich_egg" -> "Fluffy seasoned egg filling layered between buttery toasted bread slices with a dash of black pepper."
-        "sandwich_chicken" -> "Tender shredded home-spiced chicken tossed in creamy dressing and grilled between crisp golden bread."
-        "sandwich_corn_cheese" -> "Sweet golden corn kernels & melty cheese grilled till bubbly with aromatic oregano & herbs."
-        "sandwich_chicken_cheese" -> "Loaded with succulent spiced chicken chunks and a generous pull of melted cheese in every bite."
-        "sandwich_egg_cheese" -> "Classic comfort sandwich pairing warm spiced egg with rich melted cheese on crispy toasted bread."
-        "burger_egg" -> "Soft toasted bun stacked with a golden spiced egg patty, crisp onions & signature house mayo."
-        "burger_egg_cheese" -> "Crispy egg patty topped with a warm slice of melted cheese, fresh crunch & tangy house sauce."
-        "burger_chicken" -> "Home-style crispy chicken patty layered with fresh veggies and creamy spiced burger dressing."
-        "burger_chicken_cheese" -> "Our crowd-favorite juicy chicken patty crowned with melted cheese in a warm toasted bun."
-        "biryani_egg" -> "Fragrant long-grain basmati rice slow-cooked with whole garam masala, spiced eggs & tender potato."
-        "biryani_chicken" -> "Authentic Kolkata-style aromatic basmati biryani with succulent spiced chicken, golden potato & home-ground masala."
-        else -> "Freshly prepared today in our home kitchen with authentic spices and love."
-    }
 }
-
